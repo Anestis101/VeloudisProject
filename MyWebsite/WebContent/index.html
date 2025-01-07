@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Example client</title>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script>
+function getDataFromREST()
+{
+	/*
+	General form: jQuery.ajax( [settings ] ) (or jQuery.ajax( url [, settings ] ))
+	Description: Perform an asynchronous HTTP (Ajax) request
+	settings: Set of key/value pairs that configure the Ajax request - all settings are optional
+	For more info regarding key/value pairs see https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings
+	*/
+	jQuery.ajax({url: "http://localhost:8081/MyWebsite/rest/products/2",
+	type: "GET",
+	dataType: "json",
+	success: 
+		function (resultData) { 
+			alert(resultData);
+			console.log(resultData.name);
+			$("textarea#theData").text(resultData.name);
+		},
+	error : 
+		function(jqXHR, textStatus, errorThrown) {
+		},
+		timeout: 120000,
+	});
+}
+
+</script>
+</head>
+<body>
+	<button type="button" onclick="getDataFromREST()">Get Data!</button>
+	<br></br>
+	<textarea id="theData" rows="20" cols="50"></textarea>
+	<br></br>
+</body>
+</html>
