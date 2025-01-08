@@ -30,6 +30,7 @@ public class SlotService {
         slot.setTime(updatedSlot.getTime());
         slot.setRoomNumber(updatedSlot.getRoomNumber());
         slot.setRegistrarName(updatedSlot.getRegistrarName());
+        slot.setStatus(updatedSlot.getStatus());
         return slotRepository.save(slot);
     }
 
