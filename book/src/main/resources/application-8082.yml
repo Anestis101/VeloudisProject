@@ -1,0 +1,10 @@
+server:
+  port: 8082  # Second instance port
+
+spring:
+  application:
+    name: appointments-server  # Name of the service
+
+logging:
+  level:
+    root: INFO  # Adjust logging level as needed

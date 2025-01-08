@@ -1,0 +1,8 @@
+server:
+  port: 8081  # First instance port
+
+spring:
+  application:
+    name: appointments-server  # Name of the service
+
+logging:
