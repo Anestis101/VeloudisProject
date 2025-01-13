@@ -1,0 +1,67 @@
+# Default Configuration
+spring:
+  application:
+    name: appointments-service
+  main:
+    web-application-type: reactive
+  data:
+    mongodb:
+      uri: mongodb+srv://jjj:julian123@cloud-computing.ey7cr.mongodb.net/appointments
+  cloud:
+    gateway:
+      routes:
+        - id: appointments-service
+          uri: lb://appointments-service
+          predicates:
+            - Path=/slots/**
+          filters:
+            - RewritePath=/slots/(?<segment>.*), /${segment}
+      default-filters:
+        - AddResponseHeader=X-Response-Time, ${responseTime}
+
+# Eureka Discovery Client
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# Server Default Port
+server:
+  port: 8080
+
+# Logging Configuration
+logging:
+  level:
+    org.mongodb.driver: INFO
+
+---
+
+# Instance 1 Configuration
+spring:
+  config:
+    activate:
+      on-profile: instance1
+  application:
+    name: appointments-service
+server:
+  port: 8081
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+---
+
+# Instance 2 Configuration
+spring:
+  config:
+    activate:
+      on-profile: instance2
+  application:
+    name: appointments-service
+server:
+  port: 8082
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
